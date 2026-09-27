@@ -1,0 +1,173 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { ArrowLeft, Lock, Mail, User, Globe } from "lucide-react";
+
+export default function RegisterPage() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nativeLang, setNativeLang] = useState("ru");
+  const [targetLang, setTargetLang] = useState("en");
+  const [isDemoMode] = useState(true);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Registration is in Demo Mode. Database and backend are ready for deployment configuration.");
+  };
+
+  return (
+    <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-slate-50 dark:bg-slate-950">
+      {/* Back button */}
+      <div className="absolute top-6 left-6">
+        <Link 
+          href="/"
+          className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Home
+        </Link>
+      </div>
+
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="flex justify-center">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white font-bold text-xl shadow-lg shadow-blue-500/30">
+            Z
+          </div>
+        </div>
+        <h2 className="mt-6 text-center text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+          Create your ZABON account
+        </h2>
+        <p className="mt-2 text-center text-sm text-slate-600 dark:text-slate-400">
+          Learn languages. Understand the world.
+        </p>
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white dark:bg-slate-900 py-8 px-6 shadow-xl rounded-3xl border border-slate-200 dark:border-slate-800 space-y-6">
+          
+          {/* Demo Mode Notice */}
+          {isDemoMode && (
+            <div className="rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 p-4 text-xs text-amber-800 dark:text-amber-200">
+              <span className="font-semibold block mb-1">⚠️ Configuration Required / Demo Mode</span>
+              Database connection and signup actions are currently in UI preview mode.
+            </div>
+          )}
+
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                Full Name
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                  <User className="w-4 h-4" />
+                </div>
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Jaborzoda Fayzali"
+                  className="block w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                Email address
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="name@example.com"
+                  className="block w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                Password
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                  <Lock className="w-4 h-4" />
+                </div>
+                <input
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="block w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  Native Language
+                </label>
+                <select
+                  value={nativeLang}
+                  onChange={(e) => setNativeLang(e.target.value)}
+                  className="block w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-blue-600"
+                >
+                  <option value="tg">🇹🇯 Tajik</option>
+                  <option value="ru">🇷🇺 Russian</option>
+                  <option value="en">🇬🇧 English</option>
+                  <option value="kk">🇰🇿 Kazakh</option>
+                  <option value="uz">🇺🇿 Uzbek</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  Learning Language
+                </label>
+                <select
+                  value={targetLang}
+                  onChange={(e) => setTargetLang(e.target.value)}
+                  className="block w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-blue-600"
+                >
+                  <option value="en">🇬🇧 English</option>
+                  <option value="de">🇩🇪 German</option>
+                  <option value="es">🇪🇸 Spanish</option>
+                  <option value="fr">🇫🇷 French</option>
+                  <option value="ar">🇸🇦 Arabic</option>
+                  <option value="zh">🇨🇳 Chinese</option>
+                  <option value="ja">🇯🇵 Japanese</option>
+                </select>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 px-4 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20 mt-2"
+            >
+              Create Account (Demo)
+            </button>
+          </form>
+
+          <p className="text-center text-sm text-slate-600 dark:text-slate-400 pt-2">
+            Already have an account?{' '}
+            <Link href="/login" className="font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400">
+              Sign in
+            </Link>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  );
+}
